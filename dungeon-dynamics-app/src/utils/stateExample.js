@@ -27,11 +27,10 @@ export const exampleData = [
     { url: '../../../public/audio/atmos2-piano.mp3' },
     { url: '../../../public/audio/atmos2-harp.mp3' },
     { url: '../../../public/audio/atmos2-plucky.mp3' },
-    { url: '../../../public/audio/atmos2weird.mp3', sceneId: ["1"] }
+    { url: '../../../public/audio/atmos2weird.mp3' }
 ]
 
 export const exampleScenes = [
-    { name: "scene1" },
+    { name: "scene1", id: "1" },
     { name: "scene2" },
-    {}
 ]

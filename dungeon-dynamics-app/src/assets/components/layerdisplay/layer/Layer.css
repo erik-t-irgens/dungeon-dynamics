@@ -1,0 +1,47 @@
+.layer {
+    /* Muted color with transparency */
+    border-radius: 2px;
+    /* position: grid; */
+    overflow: auto;
+    /* height: 50%; */
+    top: 5px;
+    bottom: 0;
+    margin-top: 5px;
+}
+
+.layer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(74, 3, 114, 0.6), rgba(96, 4, 153, 0.9));
+    /* Transparent to solid white gradient */
+    /* pointer-events: none; */
+    z-index: -1;
+}
+
+.layerButton {
+    /* position: absolute; */
+    display: flex;
+    top: 20px;
+    /* Adjusted top position */
+    width: 100%;
+    left: 0;
+    font-size: 10%;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 1px solid rgba(36, 0, 62, 0.347);
+    /* Thin border with brighter color */
+}
+
+.layerButton:hover {
+    background-color: rgb(51, 1, 80);
+    /* Brighter color on hover */
+    background-color: rgba(30, 29, 29, 0.8);
+    /* Muted color for buttons */
+    border: 1px solid rgba(240, 240, 240, 0.8);
+    /* Thin border with brighter color */
+
+}

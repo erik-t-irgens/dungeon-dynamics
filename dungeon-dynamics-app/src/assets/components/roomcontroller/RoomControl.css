@@ -1,0 +1,8 @@
+#roomControl {
+    align-items: center;
+    top: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90vw;
+    position: fixed;
+}

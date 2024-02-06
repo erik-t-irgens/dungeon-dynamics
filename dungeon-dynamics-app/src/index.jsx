@@ -11,7 +11,8 @@ export class App extends Component {
 		super();
 		this.state = {
 			layers: [],
-			scenes: [],
+			scenes: [{ name: "Unassigned Layers", id: "0" }],
+			formVisible: false
 		}
 
 	}
@@ -23,64 +24,70 @@ export class App extends Component {
 
 		// Process each layer object to ensure it has the expected structure
 		layersFromServer.map(layer => {
-			this.handleCreatingItems(layer, "layer")
+			this.handleCreatingItem(layer, "layer")
 		});
 
 		scenesFromServer.map(scene => {
-			this.handleCreatingItems(scene, "scene")
+			this.handleCreatingItem(scene, "scene")
 		});
 
 	};
 
-	handleCreatingItems = (item, itemType) => {
-		// Define default values for missing properties depending on itemType
-		let defaultItem;
-		// Determine if it is a layer or a scene
-		if (itemType === "layer") {
 
-			// Set default name to the filename if not provided. If filename doesn't exist, default to "Layer Name"
+	handleCreatingItem = (item, itemType) => {
+		let defaultItem;
+
+		if (itemType === "layer") {
 			const fileName = item.url.substring(item.url.lastIndexOf('/') + 1).split('.')[0];
 			const defaultName = fileName || "Layer Name";
-
 
 			defaultItem = {
 				name: defaultName,
 				url: "Layer URL",
-				sceneId: [],
+				sceneId: item.sceneId || ["0"], // Use provided sceneId if available
 				baseLayer: false,
 				layerNumber: 0,
 				active: false,
 				loopable: false,
 				endEvent: "",
-				...item, // Spread the properties of the fetched layer object
-			};
-
-			// Check if sceneId is provided, create a new scene if necessary
-			defaultItem.sceneId.forEach(sceneId => {
-				if (!this.state.scenes.find(scene => scene.id === sceneId)) {
-					this.setState(prevState => ({
-						scenes: [...prevState.scenes, { name: "Placeholder Scene", id: sceneId }],
-					}));
-				}
-			});
-		} else if (itemType === "scene") {
-			defaultItem = {
-				name: "Scene Name",
 				id: generateUUID(),
 				...item,
+			};
+
+		} else if (itemType === "scene") {
+			const existingScene = this.state.scenes.find(scene => scene.id === item.id);
+
+			if (existingScene) {
+				defaultItem = { ...existingScene, ...item };
+			} else {
+				defaultItem = {
+					name: "Scene Name",
+					id: item.id || generateUUID(),
+					...item,
+				};
 			}
 		} else {
 			console.error('Unknown itemType:', itemType, " | Item type should refer to which state object is being updated.")
+			return; // Exit function if itemType is unknown
 		}
+
+		// Check if sceneId is provided and if it's a new scene
+		// if (itemType === "layer" && defaultItem.sceneId.length > 0) {
+		// 	defaultItem.sceneId.forEach(sceneId => {
+		// 		if (!this.state.scenes.find(scene => scene.id === sceneId)) {
+		// 			this.setState(prevState => ({
+		// 				scenes: [...prevState.scenes, { name: "Placeholder Scene", id: sceneId }],
+		// 			}));
+		// 		}
+		// 	});
+		// }
 
 		this.setState(prevState => ({
 			[`${itemType}s`]: [...prevState[`${itemType}s`], defaultItem],
-		}), () => {
-			console.log(this.state)
-		});
+		}));
 	}
 
-	handleDeletingItems = (itemId, itemType) => {
+	handleDeletingItem = (itemId, itemType) => {
 		this.setState((prevState) => {
 			let updatedItems;
 			if (itemType === "layer") {
@@ -98,6 +105,7 @@ export class App extends Component {
 	};
 
 	handleUpdatingItem = (itemId, itemType, updatedProperties) => {
+		console.log("LOOK OVER HERE", itemId, itemType, updatedProperties)
 		this.setState(prevState => {
 			const updatedItems = prevState[`${itemType}s`].map(item => {
 				if (item.id === itemId) {
@@ -115,10 +123,10 @@ export class App extends Component {
 
 
 	render() {
-		const { layers, scenes } = this.state;
+		const { layers, scenes, formVisible } = this.state;
 		return (
 			<div>
-				<RoomControl layers={layers} scenes={scenes}></ RoomControl>
+				<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes}></ RoomControl>
 			</div>
 		)
 	}

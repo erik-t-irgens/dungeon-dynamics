@@ -4,7 +4,7 @@ import { Howl, Howler } from 'howler'
 import './Layer.css';
 // Class component that controls the whole room, and is the highest level of state.
 
-export default function Layer(props) {
+export default function LayerDetail(props) {
 
     let newSound;
 
