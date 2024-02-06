@@ -23,11 +23,11 @@ const scenes = [
 
 
 export const exampleData = [
-    { name: "layer1", url: '../../../public/audio/atmos2-violinpizz.mp3' },
-    { name: "layer2", url: '../../../public/audio/atmos2-piano.mp3' },
-    { name: "layer3", url: '../../../public/audio/atmos2-harp.mp3' },
-    { name: "layer4", url: '../../../public/audio/atmos2-plucky.mp3' },
-    { name: "layer5", url: '../../../public/audio/atmos2weird.mp3', sceneId: ["1"] }
+    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
+    { url: '../../../public/audio/atmos2-piano.mp3' },
+    { url: '../../../public/audio/atmos2-harp.mp3' },
+    { url: '../../../public/audio/atmos2-plucky.mp3' },
+    { url: '../../../public/audio/atmos2weird.mp3', sceneId: ["1"] }
 ]
 
 export const exampleScenes = [

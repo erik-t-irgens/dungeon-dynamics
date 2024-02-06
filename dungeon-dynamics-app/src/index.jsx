@@ -37,8 +37,14 @@ export class App extends Component {
 		let defaultItem;
 		// Determine if it is a layer or a scene
 		if (itemType === "layer") {
+
+			// Set default name to the filename if not provided. If filename doesn't exist, default to "Layer Name"
+			const fileName = item.url.substring(item.url.lastIndexOf('/') + 1).split('.')[0];
+			const defaultName = fileName || "Layer Name";
+
+
 			defaultItem = {
-				name: "Layer Name",
+				name: defaultName,
 				url: "Layer URL",
 				sceneId: [],
 				baseLayer: false,
