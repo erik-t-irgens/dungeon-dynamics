@@ -17,6 +17,10 @@ export default function ScenePlayer(props) {
         onHowlGroupVolume(filteredLayers, event.currentTarget.value)
     }
 
+    const handleGlobalVolume = (event) => {
+        Howler.volume(event.currentTarget.value)
+    }
+
 
     return (
 
@@ -55,6 +59,7 @@ export default function ScenePlayer(props) {
             <label>Scene Volume:</label><input type="range" max="1.0" min="0" value={masterVolume} step=".01" onChange={handleChange}></input>
             <button onClick={() => onHowlGroupPlay(filteredLayers)}>Play All</button>
             <button onClick={() => onHowlGroupStop(filteredLayers)}>Stop All</button>
+            <label>Global Volume:</label><input type="range" max="1.0" min="0" step=".01" onChange={handleGlobalVolume}></input>
 
         </div >
 
