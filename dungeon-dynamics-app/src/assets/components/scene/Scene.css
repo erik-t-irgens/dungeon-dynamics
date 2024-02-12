@@ -7,9 +7,10 @@
     position: relative;
     /* justify-content: end; */
     /* position: grid; */
-    width: 80%;
+    min-width: 350px;
+    /* max-height: 400px; */
     /* height: 60px; */
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 
 }
 
@@ -19,12 +20,12 @@
     position: relative;
     /* justify-content: end; */
     /* position: grid; */
-    width: 80%;
+    min-width: 350px;
     /* height: 60px; */
     left: 0;
     right: 0;
     top: 0;
-    height: 200px;
+    /* height: 200px; */
 }
 
 .layer {
@@ -33,7 +34,7 @@
 }
 
 .layerText {
-    font-size: 10px;
+    font-size: 1.6rem;
 }
 
 .scene::after {
@@ -52,7 +53,7 @@
 .scene .buttons {
     position: absolute;
     display: flex;
-    top: -15px;
+    top: -34px;
     /* Adjusted top position */
     right: 2px;
     z-index: 1;
@@ -60,12 +61,12 @@
 }
 
 .sceneHeader {
-    font-size: 7px;
+    font-size: 1.5rem;
     position: absolute;
     left: 0;
-    height: 8px;
+    /* height: 8px; */
     text-align: left;
-    top: 0px;
+    top: -34px;
     /* background-color: rgba(46, 46, 46, 0.581); */
     /* width: 50%; */
 
@@ -81,10 +82,10 @@
     /* border-radius: 50%; */
     /* Rounded button */
     cursor: pointer;
-    font-size: 10%;
-    border: 1px solid rgba(240, 240, 240, 0);
+    font-size: 1.3rem;
+    border: 1px solid rgba(86, 10, 111, 0.419);
     /* Thin border with brighter color */
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgb(0, 0, 0);
 
 }
 

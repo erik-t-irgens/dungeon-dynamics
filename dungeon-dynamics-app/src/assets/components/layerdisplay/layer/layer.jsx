@@ -8,13 +8,20 @@ export default function Layer(props) {
 
     let newSound;
 
-    if (props.layer) {
-        newSound = new Howl({
-            src: [props.layer.url]
-        });
-    } else {
-        newSound = "Invalid"
-    }
+
+
+    useEffect(() => {
+        if (props.layer) {
+            newSound = new Howl({
+                src: [props.layer.url],
+                loop: props.layer.loopable,
+            });
+        } else {
+            newSound = "Invalid"
+        }
+        // newSound.loop(!props.layer.loopable)
+        console.log("NEW SOUND ", newSound)
+    });
 
     console.log("this is layer: " + newSound)
 
@@ -22,6 +29,7 @@ export default function Layer(props) {
 
         <div className="">
             <button className="layerButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
+            <button className="loopButton" onClick={() => props.onUpdatingItem(props.layer.id, "layer", { loopable: !props.layer.loopable })}></button>
         </div>
 
 

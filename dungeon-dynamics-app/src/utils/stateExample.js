@@ -27,6 +27,16 @@ export const exampleData = [
     { url: '../../../public/audio/atmos2-piano.mp3' },
     { url: '../../../public/audio/atmos2-harp.mp3' },
     { url: '../../../public/audio/atmos2-plucky.mp3' },
+    { url: '../../../public/audio/atmos2weird.mp3' },
+    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
+    { url: '../../../public/audio/atmos2-piano.mp3' },
+    { url: '../../../public/audio/atmos2-harp.mp3' },
+    { url: '../../../public/audio/atmos2-plucky.mp3' },
+    { url: '../../../public/audio/atmos2weird.mp3' },
+    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
+    { url: '../../../public/audio/atmos2-piano.mp3' },
+    { url: '../../../public/audio/atmos2-harp.mp3' },
+    { url: '../../../public/audio/atmos2-plucky.mp3' },
     { url: '../../../public/audio/atmos2weird.mp3' }
 ]
 
