@@ -6,7 +6,7 @@ import './Environment.css'
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function EnvironmentDetails(props) {
-    const { scenes, key, environment, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveEnvironment, onRemoveActiveEnvironment, onSetActiveScene, onRemoveActiveScene, activeScene, layers, environments } = this.props;
+    const { scenes, key, environment, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveEnvironment, onRemoveActiveEnvironment, onSetEditScene, onRemoveEditScene, editScene, layers, environments } = this.props;
 
     const filteredScenes = scenes.filter(scene => scene.environmentId === environment.id)
     return (
@@ -21,12 +21,12 @@ export default function EnvironmentDetails(props) {
                 <button onClick={onRemoveActiveEnvironment} className="icon button" alt="Details" ><span className="icon">&#215;</span></button>
 
             </div>
-            {!activeScene ?
+            {!editScene ?
 
                 <div className="sceneCard">
                     {filteredScenes.length > 0 ? filteredScenes.map(scene => (
                         <div id={"scene" + scene.id} key={scene.id}>
-                            <Scene environments={environments} onSetActiveScene={onSetActiveScene} onRemoveActiveScene={onRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></Scene>
+                            <Scene environments={environments} onSetEditScene={onSetEditScene} onRemoveEditScene={onRemoveEditScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></Scene>
 
                         </div>
                     )) :
@@ -38,9 +38,9 @@ export default function EnvironmentDetails(props) {
                 </div>
                 :
                 filteredScenes.map(scene => (
-                    scene.id === activeScene ?
+                    scene.id === editScene ?
                         <div id={"scene" + scene.id} key={scene.id}>
-                            <SceneDetails environments={environments} onSetActiveScene={onSetActiveScene} onRemoveActiveScene={onRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></SceneDetails>
+                            <SceneDetails environments={environments} onSetEditScene={onSetEditScene} onRemoveEditScene={onRemoveEditScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></SceneDetails>
 
                         </div>
                         :

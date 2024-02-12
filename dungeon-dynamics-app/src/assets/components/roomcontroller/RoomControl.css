@@ -1,8 +1,41 @@
 #roomControl {
-    align-items: center;
-    /* top: 80px; */
+    /* align-items: center; */
+    /* top: 80px;
     margin-left: auto;
-    margin-right: auto;
-    width: 100%;
+    margin-right: auto; */
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
+    /* gap: 2px; */
     /* position: relative */
+    min-height: 90vh;
+}
+
+@media screen and (max-width: 800px) {
+    .room-control {
+        grid-template-columns: 1fr;
+        min-height: 100vh;
+        /* min-height: 100vh; */
+        /* One column for smaller screens */
+    }
+
+    .left-column {
+        max-height: 50vh;
+    }
+
+    .right-column {
+        max-height: 50vh;
+    }
+}
+
+.left-column {
+    background-color: #363636;
+    /* padding: 20px; */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.right-column {
+    overflow-y: auto;
+
 }

@@ -6,7 +6,7 @@ import './Environment.css'
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function Environment(props) {
-    const { scenes, key, environment, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveEnvironment, onRemoveActiveEnvironment, onSetActiveScene, onRemoveActiveScene, activeScene, layers, environments } = this.props;
+    const { scenes, key, environment, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveEnvironment, onRemoveActiveEnvironment, onSetEditScene, onRemoveEditScene, editScene, layers, environments, onSetActiveScene, onRemoveActiveScene } = this.props;
 
     const filteredScenes = scenes.filter(scene => scene.environmentId === environment.id)
     return (
@@ -21,12 +21,13 @@ export default function Environment(props) {
                 <button onClick={() => onSetActiveEnvironment(environment.id)} className="icon button" alt="Details" ><span className="icon">&#8505;</span></button>
 
             </div>
-            {!activeScene ?
+            {!editScene ?
 
                 <div className="sceneCard">
                     {filteredScenes.length > 0 ? filteredScenes.map(scene => (
                         <div id={"scene" + scene.id} key={scene.id}>
-                            <Scene onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} onSetActiveScene={onSetActiveScene} onRemoveActiveScene={onRemoveActiveScene} layers={layers} environments={environments} ></Scene>
+                            <Scene onSetActiveScene={onSetActiveScene}
+                                onRemoveActiveScene={onRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} onSetEditScene={onSetEditScene} onRemoveEditScene={onRemoveEditScene} layers={layers} environments={environments} ></Scene>
                         </div>
                     )) :
                         <div id="noScene">
@@ -39,9 +40,10 @@ export default function Environment(props) {
                 :
 
                 filteredScenes.map(scene => (
-                    scene.id === activeScene ?
-                        <div id={"scene" + scene.id} key={scene.id}>
-                            <SceneDetails environments={environments} onSetActiveScene={onSetActiveScene} onRemoveActiveScene={onRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></SceneDetails>
+                    scene.id === editScene ?
+                        <div className="sceneCard" id={"scene" + scene.id} key={scene.id}>
+                            <SceneDetails onSetActiveScene={onSetActiveScene}
+                                onRemoveActiveScene={onRemoveActiveScene} environments={environments} onSetEditScene={onSetEditScene} onRemoveEditScene={onRemoveEditScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={scene.id} scene={scene} layers={layers}></SceneDetails>
 
                         </div>
                         :

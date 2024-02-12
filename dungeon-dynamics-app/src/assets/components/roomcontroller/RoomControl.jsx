@@ -6,6 +6,7 @@ import SceneDetails from '../scene/SceneDetails';
 import './RoomControl.css';
 import EnvironmentDetails from '../environment/EnvironmentDetail';
 import Environment from '../environment/Environment';
+import ScenePlayer from '../scene/ScenePlayer';
 
 // Class component that controls the whole room, and is the highest level of state.
 
@@ -14,9 +15,22 @@ export default class RoomControl extends Component {
     constructor() {
         super();
         this.state = {
-            activeScene: "",
-            activeEnvironment: ""
+            editScene: "",
+            activeEnvironment: "",
+            activeScene: ""
         }
+    }
+
+    handleSetActiveScene = (environmentId) => {
+        this.setState(prevState => ({
+            activeScene: prevState.activeScene === "" ? environmentId : prevState.activeScene
+        }));
+    }
+
+    handleRemoveActiveScene = () => {
+        this.setState(prevState => ({
+            activeScene: prevState.activeScene != "" ? "" : prevState.activeScene
+        }));
     }
 
     handleSetActiveEnvironment = (environmentId) => {
@@ -26,56 +40,90 @@ export default class RoomControl extends Component {
     }
 
     handleRemoveActiveEnvironment = () => {
-        console.log("ACTIVE ENVIRONMNET", this.state.activeEnvironment)
         this.setState(prevState => ({
             activeEnvironment: prevState.activeEnvironment != "" ? "" : prevState.activeEnvironment
         }));
     }
 
-    handleSetActiveScene = (sceneId, environmentId) => {
+    handleSetEditScene = (sceneId, environmentId) => {
         this.setState(prevState => ({
-            activeScene: prevState.activeScene === "" ? sceneId : prevState.activeScene,
+            editScene: prevState.editScene === "" ? sceneId : prevState.editScene,
             // activeEnvironment: prevState.activeEnvironment != "" ? prevState.activeEnvironment : environmentId
         }));
     }
 
-    handleRemoveActiveScene = () => {
+    handleRemoveEditScene = () => {
         this.setState(prevState => ({
-            activeScene: prevState.activeScene !== "" ? "" : prevState.activeScene
+            editScene: prevState.editScene !== "" ? "" : prevState.editScene
         }));
     }
 
     render() {
         const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments } = this.props;
-        const { activeScene, activeEnvironment } = this.state;
+        const { editScene, activeEnvironment, activeScene } = this.state;
         console.log("Scenes", scenes)
         return (
             <div id="roomControl">
-                {!activeEnvironment ?
+                <div className="left-column">
+                    {!activeScene ?
 
-                    environments.map(environment => (
-                        <div id={"environment" + environment.id} key={environment.id}>
-                            <Environment environments={environments} onSetActiveEnvironment={this.handleSetActiveEnvironment} onRemoveActiveEnvironment={this.handleRemoveActiveEnvironment} onSetActiveScene={this.handleSetActiveScene} onRemoveActiveScene={this.handleRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={environment.id} environment={environment} layers={layers} scenes={scenes} activeScene={activeScene}></Environment>
+                        <div><p>No active scene...</p></div>
+                        :
+                        scenes.map(scene => (
+                            scene.id === activeScene ?
+                                <div id={"scene" + scene.id} key={scene.id}>
+                                    <ScenePlayer
+                                        scenes={scenes}
+                                        onSetActiveScene={this.handleSetActiveScene}
+                                        onRemoveActiveScene={this.handleRemoveActiveScene}
+                                        onSetActiveEnvironment={this.handleSetActiveEnvironment}
+                                        onRemoveActiveEnvironment={this.handleRemoveActiveEnvironment}
+                                        onSetEditScene={this.handleSetEditScene}
+                                        onRemoveEditScene={this.handleRemoveEditScene}
+                                        onCreatingItem={onCreatingItem}
+                                        onUpdatingItem={onUpdatingItem}
+                                        onDeletingItem={onDeletingItem}
+                                        key={scene.id}
+                                        scene={scene}
+                                        layers={layers}
+                                        editScene={editScene}
+                                    ></ScenePlayer>
 
-                        </div>
+                                </div> : null))
+                        // Display Scene Controller that shows all layers and player buttons!
+                    }
 
-                    ))
+                </div>
+                <div className="right-column">
+                    {!activeEnvironment ?
 
-                    :
-
-                    environments.map(environment => (
-                        environment.id === activeEnvironment ?
+                        environments.map(environment => (
                             <div id={"environment" + environment.id} key={environment.id}>
-                                <EnvironmentDetails environments={environments} onSetActiveEnvironment={this.handleSetActiveEnvironment} onRemoveActiveEnvironment={this.handleRemoveActiveEnvironment} onSetActiveScene={this.handleSetActiveScene} onRemoveActiveScene={this.handleRemoveActiveScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={environment.id} environment={environment} layers={layers} scenes={scenes} activeScene={activeScene}></EnvironmentDetails>
+                                <Environment onSetActiveScene={this.handleSetActiveScene}
+                                    onRemoveActiveScene={this.handleRemoveActiveScene} environments={environments} onSetActiveEnvironment={this.handleSetActiveEnvironment} onRemoveActiveEnvironment={this.handleRemoveActiveEnvironment} onSetEditScene={this.handleSetEditScene} onRemoveEditScene={this.handleRemoveEditScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={environment.id} environment={environment} layers={layers} scenes={scenes} editScene={editScene}></Environment>
 
                             </div>
-                            :
-                            null
 
-                    ))
+                        ))
+
+                        :
+
+                        environments.map(environment => (
+                            environment.id === activeEnvironment ?
+                                <div id={"environment" + environment.id} key={environment.id}>
+                                    <EnvironmentDetails onSetActiveScene={this.handleSetActiveScene}
+                                        onRemoveActiveScene={this.handleRemoveActiveScene} environments={environments} onSetActiveEnvironment={this.handleSetActiveEnvironment} onRemoveActiveEnvironment={this.handleRemoveActiveEnvironment} onSetEditScene={this.handleSetEditScene} onRemoveEditScene={this.handleRemoveEditScene} onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={environment.id} environment={environment} layers={layers} scenes={scenes} editScene={editScene}></EnvironmentDetails>
+
+                                </div>
+                                :
+                                null
+
+                        ))
 
 
-                }
+                    }
+                </div>
+
             </div >
         )
     }

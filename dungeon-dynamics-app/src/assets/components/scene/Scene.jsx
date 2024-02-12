@@ -5,7 +5,7 @@ import './Scene.css'
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function Scene(props) {
-    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveScene, onRemoveActiveScene, environments } = this.props;
+    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, environments, onSetActiveScene } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
     const handleDropDown = (event) => {
@@ -25,9 +25,9 @@ export default function Scene(props) {
             </select>
             <div className="buttons">
 
+                <button onClick={() => onSetActiveScene(scene.id)} className="icon button" alt="Activate" ><span className="icon">&#8853;</span></button>
 
-
-                <button onClick={() => onSetActiveScene(scene.id)} className="icon button" alt="Edit" ><span className="icon">&#9998;</span></button>
+                <button onClick={() => onSetEditScene(scene.id)} className="icon button" alt="Edit" ><span className="icon">&#9998;</span></button>
 
             </div>
 

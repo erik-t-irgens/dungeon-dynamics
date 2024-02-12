@@ -4,8 +4,8 @@ import LayerDetail from '../layerdisplay/layer/LayerDetail';
 import './Scene.css'
 // Class component that controls the whole room, and is the highest level of state.
 
-export default function SceneDetails(props) {
-    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene } = this.props;
+export default function ScenePlayer(props) {
+    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
     const layersNotIncluded = layers.filter(layer => !layer.sceneId.includes(scene.id))
@@ -13,14 +13,14 @@ export default function SceneDetails(props) {
 
     return (
 
-        <div className="scene details">
+        <div className="scene player">
 
             <input onInput={event => onUpdatingItem(scene.id, "scene", { "name": event.currentTarget.value })} value={scene.name} className="sceneHeader"></input>
             <div className="buttons">
 
-                <button className="icon button" alt="Edit" ><span className="icon">&#9998;</span></button>
 
-                <button onClick={onRemoveEditScene} className="icon button" alt="Details" ><span className="icon">&#215;</span></button>
+
+                <button onClick={onRemoveActiveScene} className="icon button" alt="Player" ><span className="icon">&#215;</span></button>
 
             </div>
 
