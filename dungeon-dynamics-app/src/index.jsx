@@ -134,7 +134,10 @@ export class App extends Component {
 		const { layers, scenes, formVisible, environments } = this.state;
 		return (
 			<div>
-				<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
+				<div id="adminPage">
+					<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
+				</div>
+				<div id="userPage"></div>
 			</div>
 		)
 	}

@@ -5,7 +5,7 @@
     margin-right: auto; */
     width: 100vw;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
+
     /* gap: 2px; */
     /* position: relative */
     min-height: 90vh;
@@ -13,18 +13,26 @@
 
 @media screen and (max-width: 800px) {
     .room-control {
-        grid-template-columns: 1fr;
+        grid-template-columns: none;
         min-height: 100vh;
         /* min-height: 100vh; */
         /* One column for smaller screens */
     }
 
     .left-column {
+        min-height: 50vh;
         max-height: 50vh;
     }
 
     .right-column {
+        min-height: 50vh;
         max-height: 50vh;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    #roomControl {
+        grid-template-columns: repeat(auto-fit, minmax(50vw, 1fr));
     }
 }
 
