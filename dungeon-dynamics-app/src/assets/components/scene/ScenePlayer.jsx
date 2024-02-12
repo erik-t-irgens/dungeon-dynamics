@@ -7,14 +7,14 @@ import './Scene.css'
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function ScenePlayer(props) {
-    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene, howlGroup, onHowlGroupVolume, onHowlGroupPlay, masterVolume } = this.props;
+    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene, howlGroup, onHowlGroupVolume, onHowlGroupPlay, masterVolume, onHowlGroupStop } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
     const filteredHowls = howlGroup.filter(howl => howl.sceneId.includes(scene.id))
     const layersNotIncluded = layers.filter(layer => !layer.sceneId.includes(scene.id))
 
     const handleChange = (event) => {
-        onHowlGroupVolume(event.currentTarget.value)
+        onHowlGroupVolume(filteredLayers, event.currentTarget.value)
     }
 
 
@@ -53,7 +53,8 @@ export default function ScenePlayer(props) {
             </div>
 
             <label>Scene Volume:</label><input type="range" max="1.0" min="0" value={masterVolume} step=".01" onChange={handleChange}></input>
-            <button onClick={() => onHowlGroupPlay(filteredHowls)}>Play All</button>
+            <button onClick={() => onHowlGroupPlay(filteredLayers)}>Play All</button>
+            <button onClick={() => onHowlGroupStop(filteredLayers)}>Stop All</button>
 
         </div >
 

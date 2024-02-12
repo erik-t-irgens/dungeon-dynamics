@@ -64,7 +64,7 @@ export default class RoomControl extends Component {
     }
 
     render() {
-        const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments, onHowlGroupPlay, onHowlGroupVolume, howlGroup } = this.props;
+        const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments, onHowlGroupPlay, onHowlGroupStop, onHowlGroupVolume, howlGroup } = this.props;
         const { editScene, activeEnvironment, activeScene, masterVolume } = this.state;
         console.log("Scenes", scenes)
         return (
@@ -81,6 +81,7 @@ export default class RoomControl extends Component {
                                         howlGroup={howlGroup}
                                         masterVolume={masterVolume}
                                         onHowlGroupPlay={onHowlGroupPlay}
+                                        onHowlGroupStop={onHowlGroupStop}
                                         onHowlGroupVolume={onHowlGroupVolume}
                                         scenes={scenes}
                                         onSetActiveScene={this.handleSetActiveScene}

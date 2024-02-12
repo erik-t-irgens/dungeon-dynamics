@@ -48,11 +48,19 @@ export class App extends Component {
 		})
 	}
 
-	handleHowlGroupVolumne = (volume) => { // volume must be 0.0 - 1.0
-		this.setState(prevState => ({
-			masterVolume: volume
-		}));
-		Howler.volume(this.state.masterVolume)
+	handleHowlGroupStop = (howlGroup) => {
+		console.log("PLAYING!")
+		howlGroup.forEach(howl => {
+			console.log(howl.howl)
+			howl.howl.stop()
+		})
+	}
+
+	handleHowlGroupVolume = (howlGroup, volume) => { // volume must be 0.0 - 1.0
+		howlGroup.forEach(howl => {
+			console.log(howl.howl)
+			howl.howl.volume(volume)
+		})
 	}
 
 	handleCreatingItem = (item, itemType) => {
@@ -61,6 +69,7 @@ export class App extends Component {
 		if (itemType === "layer") {
 			const fileName = item.url.substring(item.url.lastIndexOf('/') + 1).split('.')[0];
 			const defaultName = fileName || "Layer Name";
+			let randomId = generateUUID()
 
 			defaultItem = {
 				name: defaultName,
@@ -71,12 +80,13 @@ export class App extends Component {
 				active: false,
 				loopable: false,
 				endEvent: "",
-				id: generateUUID(),
+				id: randomId,
+				howl: new Howl({ src: item.url }),
 				...item,
 			};
 
 			this.setState(prevState => ({
-				howlGroup: [...prevState.howlGroup, { id: defaultItem.id, sceneId: defaultItem.sceneId, howl: new Howl({ src: [defaultItem.url] }) }]
+				howlGroup: [...prevState.howlGroup, { id: defaultItem.id, sceneId: [defaultItem.sceneId], howl: new Howl({ src: [defaultItem.url] }) }]
 			}))
 
 		} else if (itemType === "scene") {
@@ -155,7 +165,8 @@ export class App extends Component {
 		return (
 			<div>
 				<div id="adminPage">
-					<RoomControl howlGroup={howlGroup} onHowlGroupPlay={this.handleHowlGroupPlay} onHowl={this.handleHowlGroupVolumne} onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
+					<RoomControl howlGroup={howlGroup} onHowlGroupPlay={this.handleHowlGroupPlay}
+						onHowlGroupStop={this.handleHowlGroupStop} onHowlGroupVolume={this.handleHowlGroupVolume} onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
 				</div>
 				<div id="userPage"></div>
 			</div>

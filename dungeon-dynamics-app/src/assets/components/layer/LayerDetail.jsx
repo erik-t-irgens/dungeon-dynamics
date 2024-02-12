@@ -15,12 +15,17 @@ export default function LayerDetail(props) {
         }
     }
 
+    const handleRemoveLayer = () => {
+        onUpdatingItem(layer.id, "layer", { sceneId: layer.sceneId.filter(function (scene) { return scene !== sceneId }) })
+        onUpdatingItem(layer.id, "howl", { sceneId: layer.sceneId.filter(function (scene) { return scene !== sceneId }) })
+    }
+
 
     return (
 
         <div className="layerDetailButtons">
 
-            <button className="deleteButton" onClick={() => onUpdatingItem(layer.id, "layer", { sceneId: layer.sceneId.filter(function (scene) { return scene !== sceneId }) })}>&#x2715;</button>
+            <button className="deleteButton" onClick={handleRemoveLayer}>&#x2715;</button>
 
             <button className="layerButton columnButton" onClick={() => setRenameVisible((renameVisible) => !renameVisible)}>{props.layer.name}</button>
             {renameVisible ?

@@ -9,7 +9,7 @@ export default function LayerPlayer(props) {
 
     const [volume, setVolume] = useState(100);
     const handleChange = (event) => {
-        setVolume(volume => event.currentTarget.value)
+        layer.howl.volume(event.currentTarget.value)
     }
 
 
@@ -22,7 +22,7 @@ export default function LayerPlayer(props) {
         <div className="layerDetailButtons">
             <button onClick={() => newSound.play()}>Play</button>
             <label>{props.layer.name}</label>
-            <input type="range" min="0" max="100" value={volume} onChange={handleChange} className="layerButton columnButton" >{props.layer.name}</input>
+            <input type="range" min="0" max="1" step=".01" value={volume} onChange={handleChange} className="layerButton columnButton" >{props.layer.name}</input>
             <label>{volume + "%"}</label>
         </div>
 
