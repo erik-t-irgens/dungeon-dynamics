@@ -13,7 +13,9 @@ export class App extends Component {
 			layers: [],
 			scenes: [{ name: "Unassigned Layers", id: "0", environmentId: "0" }],
 			environments: [{ name: "Unassigned Scenes", id: "0" }],
-			formVisible: false
+			formVisible: false,
+			howlGroup: [],
+			masterVolume: 1
 		}
 
 	}
@@ -38,6 +40,20 @@ export class App extends Component {
 		});
 	};
 
+	handleHowlGroupPlay = (howlGroup) => {
+		console.log("PLAYING!")
+		howlGroup.forEach(howl => {
+			console.log(howl.howl)
+			howl.howl.play()
+		})
+	}
+
+	handleHowlGroupVolumne = (volume) => { // volume must be 0.0 - 1.0
+		this.setState(prevState => ({
+			masterVolume: volume
+		}));
+		Howler.volume(this.state.masterVolume)
+	}
 
 	handleCreatingItem = (item, itemType) => {
 		let defaultItem;
@@ -58,6 +74,10 @@ export class App extends Component {
 				id: generateUUID(),
 				...item,
 			};
+
+			this.setState(prevState => ({
+				howlGroup: [...prevState.howlGroup, { id: defaultItem.id, sceneId: defaultItem.sceneId, howl: new Howl({ src: [defaultItem.url] }) }]
+			}))
 
 		} else if (itemType === "scene") {
 			const existingScene = this.state.scenes.find(scene => scene.id === item.id);
@@ -131,11 +151,11 @@ export class App extends Component {
 
 
 	render() {
-		const { layers, scenes, formVisible, environments } = this.state;
+		const { layers, scenes, formVisible, environments, howlGroup } = this.state;
 		return (
 			<div>
 				<div id="adminPage">
-					<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
+					<RoomControl howlGroup={howlGroup} onHowlGroupPlay={this.handleHowlGroupPlay} onHowl={this.handleHowlGroupVolumne} onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
 				</div>
 				<div id="userPage"></div>
 			</div>

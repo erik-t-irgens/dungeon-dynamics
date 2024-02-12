@@ -17,9 +17,14 @@ export default class RoomControl extends Component {
         this.state = {
             editScene: "",
             activeEnvironment: "",
-            activeScene: ""
+            activeScene: "",
+            masterVolume: 1
         }
     }
+
+
+
+
 
     handleSetActiveScene = (environmentId) => {
         this.setState(prevState => ({
@@ -59,8 +64,8 @@ export default class RoomControl extends Component {
     }
 
     render() {
-        const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments } = this.props;
-        const { editScene, activeEnvironment, activeScene } = this.state;
+        const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments, onHowlGroupPlay, onHowlGroupVolume, howlGroup } = this.props;
+        const { editScene, activeEnvironment, activeScene, masterVolume } = this.state;
         console.log("Scenes", scenes)
         return (
             <div id="roomControl">
@@ -73,6 +78,10 @@ export default class RoomControl extends Component {
                             scene.id === activeScene ?
                                 <div id={"scene" + scene.id} key={scene.id}>
                                     <ScenePlayer
+                                        howlGroup={howlGroup}
+                                        masterVolume={masterVolume}
+                                        onHowlGroupPlay={onHowlGroupPlay}
+                                        onHowlGroupVolume={onHowlGroupVolume}
                                         scenes={scenes}
                                         onSetActiveScene={this.handleSetActiveScene}
                                         onRemoveActiveScene={this.handleRemoveActiveScene}

@@ -1,14 +1,21 @@
 import { h, render, Component } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
 import LayerDetail from '../layer/LayerDetail';
+import LayerPlayer from '../layer/LayerPlayer';
+import { Howl, Howler } from 'howler';
 import './Scene.css'
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function ScenePlayer(props) {
-    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene } = this.props;
+    const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene, howlGroup, onHowlGroupVolume, onHowlGroupPlay, masterVolume } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
+    const filteredHowls = howlGroup.filter(howl => howl.sceneId.includes(scene.id))
     const layersNotIncluded = layers.filter(layer => !layer.sceneId.includes(scene.id))
+
+    const handleChange = (event) => {
+        onHowlGroupVolume(event.currentTarget.value)
+    }
 
 
     return (
@@ -27,7 +34,7 @@ export default function ScenePlayer(props) {
             <div className="layer">
                 {filteredLayers.length > 0 ? filteredLayers.map(layer => (
                     <div id={"layer" + layer.id} key={layer.id}>
-                        <LayerDetail onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={layer.id} sceneId={scene.id} layer={layer} ></LayerDetail>
+                        <LayerPlayer onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={layer.id} sceneId={scene.id} layer={layer} ></LayerPlayer>
                     </div>
                 )) :
                     <div id="noLayer">
@@ -44,6 +51,9 @@ export default function ScenePlayer(props) {
                     </div></div> : <p>No Layers To Add</p>}
 
             </div>
+
+            <label>Scene Volume:</label><input type="range" max="1.0" min="0" value={masterVolume} step=".01" onChange={handleChange}></input>
+            <button onClick={() => onHowlGroupPlay(filteredHowls)}>Play All</button>
 
         </div >
 

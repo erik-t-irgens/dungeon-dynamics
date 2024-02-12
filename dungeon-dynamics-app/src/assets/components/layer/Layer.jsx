@@ -5,30 +5,27 @@ import './Layer.css';
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function Layer(props) {
+    const { layer, onUpdatingItem } = this.props
 
-    let newSound;
+    const [renameVisible, setRenameVisible] = useState(false)
 
-
-
-    useEffect(() => {
-        if (props.layer) {
-            newSound = new Howl({
-                src: [props.layer.url],
-                loop: props.layer.loopable,
-            });
-        } else {
-            newSound = "Invalid"
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            setRenameVisible(false);
         }
-        // newSound.loop(!props.layer.loopable)
-        console.log("NEW SOUND ", newSound)
-    });
-
-    console.log("this is layer: " + newSound)
+    }
 
     return (
 
-        <div className="">
-            <button className="layerButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
+        <div className="layerDetailButtons">
+
+            <button className="layerButton" onClick={() => setRenameVisible((renameVisible) => !renameVisible)}>{props.layer.name}</button>
+            {renameVisible ?
+
+                <input onKeyDown={handleKeyDown} onInput={event => onUpdatingItem(layer.id, "layer", { "name": event.currentTarget.value })} value={layer.name} className="layerButton"></input>
+
+                : null}
+
             {/* <button className="loopButton" onClick={() => props.onUpdatingItem(props.layer.id, "layer", { loopable: !props.layer.loopable })}></button> */}
         </div>
 

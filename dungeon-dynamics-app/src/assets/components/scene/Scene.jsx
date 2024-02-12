@@ -8,21 +8,13 @@ export default function Scene(props) {
     const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, environments, onSetActiveScene } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
-    const handleDropDown = (event) => {
-        onUpdatingItem(scene.id, "scene", { environmentId: event.target.value })
-    }
+
     return (
 
         <div className="scene">
 
             <input onInput={event => onUpdatingItem(scene.id, "scene", { "name": event.currentTarget.value })} value={scene.name} className="sceneHeader"></input>
-            <select value={scene.environmentId} onChange={handleDropDown}>
-                {environments.map((environment) => (
-                    <option key={environment} value={environment.id}>{environment.name}
 
-                    </option>
-                ))}
-            </select>
             <div className="buttons">
 
                 <button onClick={() => onSetActiveScene(scene.id)} className="icon button" alt="Activate" ><span className="icon">&#8853;</span></button>

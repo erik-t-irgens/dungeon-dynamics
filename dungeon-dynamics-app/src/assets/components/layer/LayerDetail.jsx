@@ -7,17 +7,14 @@ import './Layer.css';
 export default function LayerDetail(props) {
     const { onUpdatingItem, layer, sceneId } = this.props
 
-    let newSound;
+    const [renameVisible, setRenameVisible] = useState(false)
 
-    if (props.layer) {
-        newSound = new Howl({
-            src: [props.layer.url]
-        });
-    } else {
-        newSound = "Invalid"
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            setRenameVisible(false);
+        }
     }
 
-    console.log("this is layer: " + newSound)
 
     return (
 
@@ -25,7 +22,12 @@ export default function LayerDetail(props) {
 
             <button className="deleteButton" onClick={() => onUpdatingItem(layer.id, "layer", { sceneId: layer.sceneId.filter(function (scene) { return scene !== sceneId }) })}>&#x2715;</button>
 
-            <button className="layerButton columnButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
+            <button className="layerButton columnButton" onClick={() => setRenameVisible((renameVisible) => !renameVisible)}>{props.layer.name}</button>
+            {renameVisible ?
+
+                <input onKeyDown={handleKeyDown} onInput={event => onUpdatingItem(layer.id, "layer", { "name": event.currentTarget.value })} value={layer.name} className="layerButton"></input>
+
+                : null}
 
 
 
