@@ -1,6 +1,6 @@
 import { h, render, Component } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import Layer from '../layerdisplay/layer/layer';
+// import Layer from '../layer/Layer';
 import Scene from '../scene/Scene';
 import SceneDetails from '../scene/SceneDetails';
 import './RoomControl.css';

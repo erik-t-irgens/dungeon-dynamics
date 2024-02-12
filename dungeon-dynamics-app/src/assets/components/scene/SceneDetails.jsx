@@ -1,6 +1,6 @@
 import { h, render, Component } from 'preact';
 import { useState, useEffect } from 'preact/hooks';
-import LayerDetail from '../layerdisplay/layer/LayerDetail';
+import LayerDetail from '../layer/LayerDetail';
 import './Scene.css'
 // Class component that controls the whole room, and is the highest level of state.
 

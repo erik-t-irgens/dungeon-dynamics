@@ -94,11 +94,6 @@
 
 }
 
-.button .icon {
-    /* color: rgb(204, 138, 255); */
-    /* Set the color of the symbol to blue */
-    /* border-radius: 100%; */
-}
 
 .environment .button:hover {
     background-color: rgb(0, 25, 164);
