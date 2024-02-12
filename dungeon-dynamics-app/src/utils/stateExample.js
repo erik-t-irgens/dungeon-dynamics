@@ -23,21 +23,8 @@ const scenes = [
 
 
 export const exampleData = [
-    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
-    { url: '../../../public/audio/atmos2-piano.mp3' },
-    { url: '../../../public/audio/atmos2-harp.mp3' },
-    { url: '../../../public/audio/atmos2-plucky.mp3' },
-    { url: '../../../public/audio/atmos2weird.mp3' },
-    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
-    { url: '../../../public/audio/atmos2-piano.mp3' },
-    { url: '../../../public/audio/atmos2-harp.mp3' },
-    { url: '../../../public/audio/atmos2-plucky.mp3' },
-    { url: '../../../public/audio/atmos2weird.mp3' },
-    { url: '../../../public/audio/atmos2-violinpizz.mp3' },
-    { url: '../../../public/audio/atmos2-piano.mp3' },
-    { url: '../../../public/audio/atmos2-harp.mp3' },
-    { url: '../../../public/audio/atmos2-plucky.mp3' },
-    { url: '../../../public/audio/atmos2weird.mp3' }
+    { url: '../../../public/audio/37488118.mp3' },
+    { url: '../../../public/audio/66333784.mp3' }
 ]
 
 export const exampleScenes = [

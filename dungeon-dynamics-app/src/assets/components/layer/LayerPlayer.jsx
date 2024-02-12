@@ -7,9 +7,11 @@ import './Layer.css';
 export default function LayerPlayer(props) {
     const { onUpdatingItem, layer, sceneId, setHowlGroup, howl, newSound } = this.props
 
-    const [volume, setVolume] = useState(100);
+    const [volume, setVolume] = useState(1.0);
     const handleChange = (event) => {
-        layer.howl.volume(event.currentTarget.value)
+        let prevState = volume;
+        layer.howl.fade(prevState, event.currentTarget.value, 100000)
+        setVolume(prevState => event.currentTarget.value)
     }
 
 
@@ -23,7 +25,7 @@ export default function LayerPlayer(props) {
             <button onClick={() => newSound.play()}>Play</button>
             <label>{props.layer.name}</label>
             <input type="range" min="0" max="1" step=".01" value={volume} onChange={handleChange} className="layerButton columnButton" >{props.layer.name}</input>
-            <label>{volume + "%"}</label>
+            <label>{Math.floor(volume * 100) + "%"}</label>
         </div>
 
 
