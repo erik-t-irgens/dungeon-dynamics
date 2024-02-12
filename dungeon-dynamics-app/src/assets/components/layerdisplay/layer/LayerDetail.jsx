@@ -5,6 +5,7 @@ import './Layer.css';
 // Class component that controls the whole room, and is the highest level of state.
 
 export default function LayerDetail(props) {
+    const { onUpdatingItem, layer, sceneId } = this.props
 
     let newSound;
 
@@ -20,8 +21,15 @@ export default function LayerDetail(props) {
 
     return (
 
-        <div className="">
-            <button className="layerButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
+        <div className="layerDetailButtons">
+
+            <button className="deleteButton" onClick={() => onUpdatingItem(layer.id, "layer", { sceneId: layer.sceneId.filter(function (scene) { return scene !== sceneId }) })}>&#x2715;</button>
+
+            <button className="layerButton columnButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
+
+
+
+
         </div>
 
 

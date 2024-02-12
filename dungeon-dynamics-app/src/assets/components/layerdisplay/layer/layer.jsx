@@ -29,7 +29,7 @@ export default function Layer(props) {
 
         <div className="">
             <button className="layerButton" onClick={() => newSound === "Invalid" ? alert("Invalid layer") : newSound.play()}>{props.layer.name}</button>
-            <button className="loopButton" onClick={() => props.onUpdatingItem(props.layer.id, "layer", { loopable: !props.layer.loopable })}></button>
+            {/* <button className="loopButton" onClick={() => props.onUpdatingItem(props.layer.id, "layer", { loopable: !props.layer.loopable })}></button> */}
         </div>
 
 

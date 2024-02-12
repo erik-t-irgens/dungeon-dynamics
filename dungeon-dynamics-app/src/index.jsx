@@ -2,7 +2,7 @@ import { render, Component } from 'preact';
 import RoomControl from "./assets/components/roomcontroller/RoomControl.jsx"
 
 import './style.css';
-import { exampleData, exampleScenes } from './utils/stateExample.js';
+import { exampleData, exampleScenes, exampleEnvironments } from './utils/stateExample.js';
 import { generateUUID } from './utils/uuid.js';
 
 export class App extends Component {
@@ -11,7 +11,8 @@ export class App extends Component {
 		super();
 		this.state = {
 			layers: [],
-			scenes: [{ name: "Unassigned Layers", id: "0" }],
+			scenes: [{ name: "Unassigned Layers", id: "0", environmentId: "0" }],
+			environments: [{ name: "Unassigned Scenes", id: "0" }],
 			formVisible: false
 		}
 
@@ -21,6 +22,7 @@ export class App extends Component {
 		// Some logic to get the list of objects
 		const layersFromServer = exampleData; // Replace with actual logic to call lists eventually
 		const scenesFromServer = exampleScenes;
+		const environmentsFromServer = exampleEnvironments;
 
 		// Process each layer object to ensure it has the expected structure
 		layersFromServer.map(layer => {
@@ -31,6 +33,9 @@ export class App extends Component {
 			this.handleCreatingItem(scene, "scene")
 		});
 
+		environmentsFromServer.map(environment => {
+			this.handleCreatingItem(environment, "environment")
+		});
 	};
 
 
@@ -63,6 +68,20 @@ export class App extends Component {
 				defaultItem = {
 					name: "Scene Name",
 					id: item.id || generateUUID(),
+					environmentId: item.environmentId || "0", // Use provided sceneId if available
+					...item,
+				};
+			}
+		} else if (itemType === "environment") {
+			const existingEnvironment = this.state.environments.find(environment => environment.id === item.id);
+
+			if (existingEnvironment) {
+				defaultItem = { ...existingEnvironment, ...item };
+			} else {
+				defaultItem = {
+					name: "Environment Name",
+					id: item.id || generateUUID(),
+					// environmentId: item.environmentId || "0", // Use provided environmentId if 
 					...item,
 				};
 			}
@@ -70,17 +89,6 @@ export class App extends Component {
 			console.error('Unknown itemType:', itemType, " | Item type should refer to which state object is being updated.")
 			return; // Exit function if itemType is unknown
 		}
-
-		// Check if sceneId is provided and if it's a new scene
-		// if (itemType === "layer" && defaultItem.sceneId.length > 0) {
-		// 	defaultItem.sceneId.forEach(sceneId => {
-		// 		if (!this.state.scenes.find(scene => scene.id === sceneId)) {
-		// 			this.setState(prevState => ({
-		// 				scenes: [...prevState.scenes, { name: "Placeholder Scene", id: sceneId }],
-		// 			}));
-		// 		}
-		// 	});
-		// }
 
 		this.setState(prevState => ({
 			[`${itemType}s`]: [...prevState[`${itemType}s`], defaultItem],
@@ -105,7 +113,7 @@ export class App extends Component {
 	};
 
 	handleUpdatingItem = (itemId, itemType, updatedProperties) => {
-		console.log("LOOK OVER HERE", itemId, itemType, updatedProperties)
+
 		this.setState(prevState => {
 			const updatedItems = prevState[`${itemType}s`].map(item => {
 				if (item.id === itemId) {
@@ -123,10 +131,10 @@ export class App extends Component {
 
 
 	render() {
-		const { layers, scenes, formVisible } = this.state;
+		const { layers, scenes, formVisible, environments } = this.state;
 		return (
 			<div>
-				<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes}></ RoomControl>
+				<RoomControl onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>
 			</div>
 		)
 	}

@@ -8,6 +8,9 @@ export default function SceneDetails(props) {
     const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetActiveScene, onRemoveActiveScene } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
+    const layersNotIncluded = layers.filter(layer => !layer.sceneId.includes(scene.id))
+
+
     return (
 
         <div className="scene details">
@@ -24,14 +27,22 @@ export default function SceneDetails(props) {
             <div className="layer">
                 {filteredLayers.length > 0 ? filteredLayers.map(layer => (
                     <div id={"layer" + layer.id} key={layer.id}>
-                        <LayerDetail onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={layer.id} layer={layer} ></LayerDetail>
+                        <LayerDetail onCreatingItem={onCreatingItem} onUpdatingItem={onUpdatingItem} onDeletingItem={onDeletingItem} key={layer.id} sceneId={scene.id} layer={layer} ></LayerDetail>
                     </div>
                 )) :
                     <div id="noLayer">
-                        <p className="layerText">No layers in this scene yet!</p>
+                        <p className="layerText">No layers yet!</p>
                     </div>
 
                 }
+                {layersNotIncluded.length > 0 ? <div><p>Add Layers?</p>
+                    <div class="layerAddBox">
+                        {layersNotIncluded.map((layer) => (
+                            <button className="addLayerButton" onClick={() => onUpdatingItem(layer.id, "layer", { sceneId: [...layer.sceneId, scene.id] })} key={layer}>{layer.name || "layer"}
+                            </button>
+                        ))}
+                    </div></div> : <p>No Layers To Add</p>}
+
             </div>
 
         </div >

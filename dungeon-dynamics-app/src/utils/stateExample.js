@@ -44,3 +44,8 @@ export const exampleScenes = [
     { name: "scene1", id: "1" },
     { name: "scene2" },
 ]
+
+export const exampleEnvironments = [
+    { name: "environment1" },
+    { name: "environment2" },
+]
