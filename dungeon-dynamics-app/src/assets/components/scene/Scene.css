@@ -11,8 +11,9 @@
     min-width: 350px;
     /* max-height: 400px; */
     /* height: 60px; */
-    margin-bottom: 50px;
-    border: 5px solid black;
+    margin-bottom: 100px;
+    border: 2px solid rgb(2, 181, 225);
+    border-radius: 5px;
     /* padding-top: ; */
     display: grid;
 }
@@ -21,6 +22,7 @@
     overflow: auto;
     /* margin-top: 15%; */
     max-height: 100%;
+    /* margin-bottom: 10px; */
 }
 
 .addLayerButton:hover {
@@ -50,13 +52,10 @@
 }
 
 .layer {
-
+    background-color: rgba(0, 0, 0, 0.193);
     position: relative;
 }
 
-.layerText {
-    /* font-size: 1.6rem; */
-}
 
 .scene::after {
     content: "";
@@ -65,7 +64,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(74, 3, 114, 0.6), rgba(96, 4, 153, 0.9));
+    background: linear-gradient(to bottom, rgba(2, 126, 122, 0.9), rgba(2, 96, 136, 0.6));
     /* Transparent to solid white gradient */
     /* pointer-events: none; */
     z-index: -1;

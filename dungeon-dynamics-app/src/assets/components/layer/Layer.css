@@ -34,7 +34,7 @@
     /* font-size: 1.3rem; */
     cursor: pointer;
     border-radius: 20px;
-    border: 1px solid rgba(36, 0, 62, 0.347);
+    border: 1px solid rgba(84, 84, 84, 0.347);
     /* Thin border with brighter color */
 }
 
@@ -44,8 +44,14 @@
 }
 
 .deleteButton {
-    background-color: rgb(95, 0, 0);
+    background-color: rgba(95, 0, 0, 0);
     border-radius: 100%;
+    border: none;
+    color: rgb(181, 0, 0);
+}
+
+.deleteButton:hover {
+    background-color: rgba(0, 0, 0, 0.274);
 }
 
 .columnButton {

@@ -48,7 +48,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /* background: linear-gradient(to bottom, rgba(38, 3, 216, 0.6), rgba(4, 69, 153, 0.9)); */
+    background: linear-gradient(to bottom, rgba(39, 3, 216, 0.157), rgba(4, 69, 153, 0.174));
     /* Transparent to solid white gradient */
     /* pointer-events: none; */
     z-index: -1;
