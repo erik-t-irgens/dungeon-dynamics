@@ -98,7 +98,7 @@ export class App extends Component {
 	handleHowlGroupPlay = (howlGroup) => {
 		// console.log("PLAYING!")
 		howlGroup.forEach(howl => {
-			console.log(howl.howl)
+			// console.log(howl.howl)
 			howl.howl.play()
 		})
 	}

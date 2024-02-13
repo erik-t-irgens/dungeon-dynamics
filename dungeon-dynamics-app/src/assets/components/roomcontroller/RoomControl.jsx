@@ -66,7 +66,7 @@ export default class RoomControl extends Component {
     render() {
         const { layers, scenes, onDeletingItem, onCreatingItem, onUpdatingItem, environments, onHowlGroupPlay, onHowlGroupStop, onHowlGroupVolume, howlGroup } = this.props;
         const { editScene, activeEnvironment, activeScene, masterVolume } = this.state;
-        console.log("State", this.state)
+       
         return (
             <div id="roomControl">
                 <div className="left-column">

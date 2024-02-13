@@ -21,6 +21,7 @@ export default function Header(props) {
     }, []);
 
 
+
     const { onSaveStateToFile } = this.props
     return (
 
@@ -28,7 +29,8 @@ export default function Header(props) {
             <div class="inner">
 
                 <button onClick={(onSaveStateToFile)}>Save...</button>
-                <button >Import...</button>
+                {/* <form onSubmit={handleSubmit}></form> */}
+                <input label="Import File..." type="file">Import...</input>
 
             </div>
 
