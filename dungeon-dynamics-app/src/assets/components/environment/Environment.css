@@ -2,7 +2,7 @@
     background-color: rgba(240, 240, 240, 0.073);
     /* Muted color with transparency */
     border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.606);
     /* padding: 10px; */
     position: relative;
     /* justify-content: end; */
@@ -12,7 +12,8 @@
     /* height: 60px; */
     /* margin-bottom: 50px; */
     display: grid;
-    border: 10px solid rgb(0, 0, 0);
+    border: 10px solid rgba(0, 0, 0, 0.154);
+    margin-bottom: 10px;
 
     /* max-height: 33vh; */
 

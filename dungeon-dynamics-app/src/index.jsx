@@ -1,9 +1,10 @@
 import { render, Component } from 'preact';
 import RoomControl from "./assets/components/roomcontroller/RoomControl.jsx"
-
+import Header from './assets/components/header/Header.jsx';
 import './style.css';
 import { exampleData, exampleScenes, exampleEnvironments } from './utils/stateExample.js';
 import { generateUUID } from './utils/uuid.js';
+import CreateItem from './assets/components/forms/CreateItem.jsx';
 
 export class App extends Component {
 
@@ -11,22 +12,76 @@ export class App extends Component {
 		super();
 		this.state = {
 			layers: [],
-			scenes: [{ name: "Unassigned Layers", id: "0", environmentId: "0" }],
-			environments: [{ name: "Unassigned Scenes", id: "0" }],
+			scenes: [
+				// { name: "Unassigned Layers", id: "0", environmentId: "0" }
+			],
+			environments: [
+				// { name: "Unassigned Scenes", id: "0" }
+			],
 			formVisible: false,
 			howlGroup: [],
 			masterVolume: 1
 		}
 
 	}
+	handleSaveStateToFile = () => {
+		console.log("Saving to file...");
+		let stringableState = {};
+		let stringableLayers = this.state.layers.map((layer) => {
+			const { howl, ...stringableLayer } = layer;
+			return stringableLayer;
+		});
+		stringableState["layers"] = stringableLayers;
+		stringableState["scenes"] = this.state.scenes;
+		stringableState["environments"] = this.state.environments;
+		const stringifiedState = JSON.stringify(stringableState);
+
+		const element = document.createElement("a");
+		const textFile = new Blob([stringifiedState], { type: "text/plain" }); //pass data from localStorage API to blob
+		element.href = URL.createObjectURL(textFile);
+		element.download = "userFile.txt";
+
+		// Simulate click event on anchor element
+		element.style.display = "none"; // Hide the element
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element); // Remove the element after click
+	};
+
+	handleSaveStateToLocalStorage = () => {
+		//Stringify our state into separate variables if possible
+		// console.log("SAVING TO LOCAL STORAGE...")
+		let stringableState = {}
+		let stringableLayers = this.state.layers.map(layer => {
+			const { howl, ...stringableLayer } = layer;
+			return stringableLayer
+		})
+		stringableState["layers"] = stringableLayers;
+		stringableState["scenes"] = this.state.scenes;
+		stringableState["environments"] = this.state.environments;
+		const stringifiedState = JSON.stringify(stringableState)
+		localStorage.setItem("state", stringifiedState);
+
+	}
 
 	componentDidMount = () => {
+		let layersFromServer = exampleData; // Replace with actual logic to call lists eventually
+		let scenesFromServer = [
+			{ name: "Unassigned Layers", id: "0", environmentId: "0" }
+		];
+		let environmentsFromServer = [{ name: "Unassigned Scenes", id: "0" }];
+		if (localStorage.getItem("state") !== null) {
+			let loadedLocalStorage = JSON.parse(localStorage.getItem("state"))
+			layersFromServer = loadedLocalStorage.layers;
+			scenesFromServer = loadedLocalStorage.scenes;
+			environmentsFromServer = loadedLocalStorage.environments;
+		}
 		// Some logic to get the list of objects
-		const layersFromServer = exampleData; // Replace with actual logic to call lists eventually
-		const scenesFromServer = exampleScenes;
-		const environmentsFromServer = exampleEnvironments;
+
 
 		// Process each layer object to ensure it has the expected structure
+
+
 		layersFromServer.map(layer => {
 			this.handleCreatingItem(layer, "layer")
 		});
@@ -41,7 +96,7 @@ export class App extends Component {
 	};
 
 	handleHowlGroupPlay = (howlGroup) => {
-		console.log("PLAYING!")
+		// console.log("PLAYING!")
 		howlGroup.forEach(howl => {
 			console.log(howl.howl)
 			howl.howl.play()
@@ -49,16 +104,16 @@ export class App extends Component {
 	}
 
 	handleHowlGroupStop = (howlGroup) => {
-		console.log("PLAYING!")
+		// console.log("PLAYING!")
 		howlGroup.forEach(howl => {
-			console.log(howl.howl)
+			// console.log(howl.howl)
 			howl.howl.stop()
 		})
 	}
 
 	handleHowlGroupVolume = (howlGroup, volume) => { // volume must be 0.0 - 1.0
 		howlGroup.forEach(howl => {
-			console.log(howl.howl)
+			// console.log(howl.howl)
 			howl.howl.volume(volume)
 		})
 	}
@@ -164,6 +219,8 @@ export class App extends Component {
 		const { layers, scenes, formVisible, environments, howlGroup } = this.state;
 		return (
 			<div>
+				<Header onSaveStateToLocalStorage={this.handleSaveStateToLocalStorage} onSaveStateToFile={this.handleSaveStateToFile}></Header>
+				{formVisible ? <CreateItem></CreateItem> : null}
 				<div id="adminPage">
 					<RoomControl howlGroup={howlGroup} onHowlGroupPlay={this.handleHowlGroupPlay}
 						onHowlGroupStop={this.handleHowlGroupStop} onHowlGroupVolume={this.handleHowlGroupVolume} onCreatingItem={this.handleCreatingItem} onUpdatingItem={this.handleUpdatingItem} onDeletingItem={this.handleDeletingItem} layers={layers} scenes={scenes} environments={environments}></ RoomControl>

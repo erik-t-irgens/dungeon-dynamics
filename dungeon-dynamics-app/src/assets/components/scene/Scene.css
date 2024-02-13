@@ -83,10 +83,12 @@
 .sceneHeader {
     font-size: 1.1rem;
     position: absolute;
-    left: 0;
+    /* left: 0; */
     /* height: 8px; */
     text-align: left;
-    top: -34px;
+    top: -26px;
+    border: 2px solid rgb(2, 181, 225);
+    border-radius: 5px;
     /* background-color: rgba(46, 46, 46, 0.581); */
     /* width: 50%; */
 
@@ -109,12 +111,12 @@
 
 }
 
-.button .icon {
+/* .button .icon {
     /* color: rgb(204, 138, 255); */
-    /* Set the color of the symbol to blue */
-}
+/* Set the color of the symbol to blue */
+/* } */
 
-.scene .button:hover {
+*/ .scene .button:hover {
     background-color: rgb(51, 1, 80);
     /* Brighter color on hover */
     background-color: rgba(30, 29, 29, 0.8);

@@ -10,7 +10,6 @@ export default function ScenePlayer(props) {
     const { layers, key, scene, onCreatingItem, onDeletingItem, onUpdatingItem, onSetEditScene, onRemoveEditScene, onRemoveActiveScene, howlGroup, onHowlGroupVolume, onHowlGroupPlay, masterVolume, onHowlGroupStop } = this.props;
 
     const filteredLayers = layers.filter(layer => layer.sceneId.includes(scene.id))
-    const filteredHowls = howlGroup.filter(howl => howl.sceneId.includes(scene.id))
     const layersNotIncluded = layers.filter(layer => !layer.sceneId.includes(scene.id))
 
     const handleChange = (event) => {
@@ -20,6 +19,14 @@ export default function ScenePlayer(props) {
     const handleGlobalVolume = (event) => {
         Howler.volume(event.currentTarget.value)
     }
+
+    useEffect(() => {
+        return () => {
+            filteredLayers.forEach(layer => {
+                layer.howl.fade(1, 0, 100000)
+            });
+        }
+    })
 
 
     return (
