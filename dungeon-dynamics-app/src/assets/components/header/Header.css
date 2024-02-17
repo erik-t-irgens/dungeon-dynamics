@@ -1,1 +1,23 @@
-/* 
+.dropdown-content {
+    position: absolute;
+    /* left: 200px; */
+    background-color: rgba(0, 0, 0, 0.684);
+    z-index: 100;
+    margin-top: 5px
+}
+
+.dropdown-content button {
+    display: block;
+    margin: 2px;
+}
+
+.dropdown-content input {
+    display: block;
+    margin: 2px;
+}
+
+.header {
+    justify-content: left;
+    position: absolute;
+    top: 0;
+}

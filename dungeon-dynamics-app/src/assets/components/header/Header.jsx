@@ -1,13 +1,19 @@
 
+import CreateItem from '../forms/CreateItem';
 import './Header.css';
 import { useEffect, useState } from 'preact/hooks';
 export default function Header(props) {
 
     const [formVisible, setFormVisible] = useState(false);
-
+    const [fileButtonsVisible, setFileButtonsVisible] = useState(false);
     const handleOpenForm = () => {
         setFormVisible(!formVisible)
     }
+
+    const handleShowFileButtons = () => {
+        setFileButtonsVisible(!fileButtonsVisible)
+    }
+
 
     useEffect(() => {
         const preventUnload = (event) => {
@@ -28,21 +34,31 @@ export default function Header(props) {
 
 
 
-    const { onSaveStateToFile } = this.props
+    const { onSaveStateToFile, scenes, environments, onCreatingItem } = this.props
     return (
 
+        // onCreatingItem, scenes, environments
         <div className="header">
             <div class="inner">
+                <div className="buttonContainer">
+                    <button onClick={handleShowFileButtons} className="dropdownButton">File Actions</button>
+                    <button onClick={handleOpenForm} className="dropdownButton">Create...</button>
 
-                <div className="dropdown-content">
-                    <button onClick={(onSaveStateToFile)}>Save to File</button>
-                    {/* <form onSubmit={handleSubmit}></form> */}
-                    <input label="Import File..." type="file">Import from File</input>
+                    {fileButtonsVisible ? <div className="dropdown-content">
+                        <button onClick={(onSaveStateToFile)}>Save to File</button>
+                        {/* <form onSubmit={handleSubmit}></form> */}
+                        <input label="Import File..." type="file">Import from File</input>
 
+                    </div> : null}
+
+                    <div className="dropdown-content">
+
+                    </div>
                 </div>
-                <div className="dropdown-content">
 
-                </div>
+                {formVisible ? <CreateItem onCreatingItem={onCreatingItem} scenes={scenes} environments={environments}></CreateItem> : null}
+
+
 
             </div>
 

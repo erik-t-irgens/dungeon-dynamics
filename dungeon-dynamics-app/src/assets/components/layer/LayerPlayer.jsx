@@ -13,8 +13,9 @@ export default function LayerPlayer(props) {
     const handleVolumeChange = (event) => {
         const rect = event.target.getBoundingClientRect();
         const newVolume = Math.max(0, Math.min(1, event.offsetX / rect.width));
+        layer.howl.fade(volume, newVolume, 100000);
         setVolume(newVolume);
-        layer.howl.volume(newVolume);
+
     };
 
     const handleMouseDown = (event) => {

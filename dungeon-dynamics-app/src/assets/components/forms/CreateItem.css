@@ -1,0 +1,60 @@
+.createForm {
+    position: absolute;
+    z-index: 10;
+    top: 25vw;
+    left: 25vw;
+    /* margin: 0 auto; */
+    /* text-align: center;
+    align-self: center;
+    align-items: center; */
+    background-color: rgba(70, 70, 70, 0.94);
+    width: 50vw;
+    /* min-height: 35vh; */
+    border: 1px dashed rgb(0, 174, 255);
+    border-radius: 5px;
+
+}
+
+.creationForm {
+    top: 25%;
+    position: relative;
+    background: black;
+    width: 70%;
+    left: 15%;
+    align-content: center;
+    min-height: 50%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+.creationForm input {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .5rem;
+}
+
+.creationForm select {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.fileTab {
+    background-color: rgb(53, 53, 53);
+    display: inline;
+    border: 1px solid rgb(0, 191, 255);
+    padding: .3rem;
+    margin: 2px;
+    top: 10px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.fileTab:hover {
+    background-color: rgb(4, 4, 4);
+
+}

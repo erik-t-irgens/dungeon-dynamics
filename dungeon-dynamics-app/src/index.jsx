@@ -219,7 +219,8 @@ export class App extends Component {
 		const { layers, scenes, formVisible, environments, howlGroup } = this.state;
 		return (
 			<div>
-				<Header onSaveStateToLocalStorage={this.handleSaveStateToLocalStorage} onSaveStateToFile={this.handleSaveStateToFile}></Header>
+				<Header scenes={scenes} environments={environments} onCreatingItem={this.handleCreatingItem} onSaveStateToLocalStorage={this.handleSaveStateToLocalStorage} onSaveStateToFile={this.handleSaveStateToFile}
+				></Header>
 				{formVisible ? <CreateItem></CreateItem> : null}
 				<div id="adminPage">
 					<RoomControl howlGroup={howlGroup} onHowlGroupPlay={this.handleHowlGroupPlay}
