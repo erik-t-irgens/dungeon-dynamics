@@ -24,7 +24,13 @@ const scenes = [
 
 export const exampleData = [
     { url: '../../../public/audio/37488118.mp3' },
-    { url: '../../../public/audio/66333784.mp3' }
+    { url: '../../../public/audio/66333784.mp3' },
+    { url: '../../../public/audio/Grasp-of-Avarice-(Action)-orch.mp3' },
+    { url: '../../../public/audio/Grasp-of-Acarive-(Action).mp3' },
+    { url: '../../../public/audio/Grasp-of-Avarice-(Ambient).mp3' },
+    { url: '../../../public/audio/Grasp-of-Acarive-(High-Action)-Orch.mp3' },
+    { url: '../../../public/audio/Grasp-of-Avarice-(High-Action).mp3' },
+
 ]
 
 export const exampleScenes = [

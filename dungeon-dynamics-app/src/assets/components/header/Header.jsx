@@ -1,7 +1,13 @@
 
 import './Header.css';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 export default function Header(props) {
+
+    const [formVisible, setFormVisible] = useState(false);
+
+    const handleOpenForm = () => {
+        setFormVisible(!formVisible)
+    }
 
     useEffect(() => {
         const preventUnload = (event) => {
@@ -28,9 +34,15 @@ export default function Header(props) {
         <div className="header">
             <div class="inner">
 
-                <button onClick={(onSaveStateToFile)}>Save...</button>
-                {/* <form onSubmit={handleSubmit}></form> */}
-                <input label="Import File..." type="file">Import...</input>
+                <div className="dropdown-content">
+                    <button onClick={(onSaveStateToFile)}>Save to File</button>
+                    {/* <form onSubmit={handleSubmit}></form> */}
+                    <input label="Import File..." type="file">Import from File</input>
+
+                </div>
+                <div className="dropdown-content">
+
+                </div>
 
             </div>
 
