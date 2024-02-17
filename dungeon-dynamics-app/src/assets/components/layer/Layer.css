@@ -70,3 +70,39 @@
     /* Thin border with brighter color */
 
 }
+
+/* Volume */
+.layerNameVolume {
+    position: absolute;
+    left: 2rem;
+}
+
+.volumePercentage {
+    position: absolute;
+    right: 15%;
+}
+
+.volumeIndicator {
+    background-color: rgba(0, 0, 0, 0.153);
+    width: 80%;
+
+    /* position: absolute; */
+}
+
+.volumeBar {
+    /* width: 10%; */
+    border-right: 1px solid rgb(0, 191, 255);
+    height: 1.3rem;
+    background-color: rgba(8, 58, 101, 0.714);
+    transition: all 1s ease-in-out
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+}
+
+
+
+.volumeButtons {
+    right: 0;
+    position: absolute;
+}
