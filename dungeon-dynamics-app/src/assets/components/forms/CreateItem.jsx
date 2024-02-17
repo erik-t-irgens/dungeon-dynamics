@@ -1,7 +1,13 @@
-import { useState } from "preact/hooks"
+import { useState, useEffect } from "preact/hooks"
 import './CreateItem.css'
 export default function CreateItem(props) {
-    const { onCreatingItem, scenes, environments } = this.props
+    const { onCreatingItem, scenes, environments, onOpenForm } = this.props
+
+    const [isDragging, setIsDragging] = useState(false);
+    const [offsetX, setOffsetX] = useState(0);
+    const [offsetY, setOffsetY] = useState(0);
+    const [posX, setPosX] = useState(25);
+    const [posY, setPosY] = useState(25);
 
     const [formType, setFormType] = useState("layer")
 
@@ -25,21 +31,55 @@ export default function CreateItem(props) {
             }
 
         }
-        console.log(formData)
         // Call the onCreatingItem function with the form type and form data
-        console.log(formType, data)
         onCreatingItem(data, formType);
     };
 
+    const handleMouseDown = (event) => {
+        setIsDragging(true);
+        setOffsetX((event.clientX - posX) / 10);
+        setOffsetY((event.clientY - posY) / 10);
+    };
+
+    const handleMouseMove = (event) => {
+        event.preventDefault()
+        if (isDragging) {
+            const deltaX = event.clientX - offsetX - posX;
+            const deltaY = event.clientY - offsetY - posY;
+            setPosX((posX + deltaX) / 10);
+            setPosY((posY + deltaY) / 10);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+        } else {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        }
+
+        return () => {
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+        };
+    }, [isDragging]);
 
 
     return (
 
-        <div className="createForm">
+        <div className="createForm" style={{ top: `${posY}vw`, left: `${posX}vw` }}
+            onMouseDown={handleMouseDown}>
             <div className="formTabGroup">
                 <div onClick={() => setFormType("layer")} className="fileTab">Layer</div>
                 <div onClick={() => setFormType("scene")} className="fileTab">Scene</div>
                 <div onClick={() => setFormType("environment")} className="fileTab">Environment</div>
+                <div className="fileTab exitButton" onClick={onOpenForm}>&#x2715;</div>
 
             </div>
 

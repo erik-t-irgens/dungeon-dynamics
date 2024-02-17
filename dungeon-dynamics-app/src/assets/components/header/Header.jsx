@@ -56,7 +56,7 @@ export default function Header(props) {
                     </div>
                 </div>
 
-                {formVisible ? <CreateItem onCreatingItem={onCreatingItem} scenes={scenes} environments={environments}></CreateItem> : null}
+                {formVisible ? <CreateItem onOpenForm={handleOpenForm} onCreatingItem={onCreatingItem} scenes={scenes} environments={environments}></CreateItem> : null}
 
 
 
