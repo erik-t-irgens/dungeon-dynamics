@@ -9,15 +9,17 @@ export default function CreateItem(props) {
     const [posX, setPosX] = useState(25);
     const [posY, setPosY] = useState(25);
 
+    const [selectedEnvironment, setSelectedEnvironment] = useState()
+
+
+
     const [formType, setFormType] = useState("layer")
 
     const handleSubmitForm = (event) => {
-        event.preventDefault(); // Prevent default form submission behavior
+        event.preventDefault();
 
-        const formData = new FormData(event.target); // Create a FormData object from the form
-
+        const formData = new FormData(event.target);
         const data = {}; // Object to hold form data
-
         // Iterate over form elements and add their values to the data object
         for (const [name, value] of formData.entries()) {
             data[name] = value;
@@ -103,13 +105,16 @@ export default function CreateItem(props) {
                         <label htmlFor="url">File Path</label>
                         <input type={"text"} name="url" />
 
-                        <label htmlFor="sceneId">Scene</label>
-                        <select name="sceneId" >
-                            <option value="">Assign an existing Scene...</option>
-                            {scenes.map(scene => (
-                                <option key={scene.id} value={[scene.id]}>{scene.name}</option>
-                            ))}
-                        </select>
+                        <div><label htmlFor="sceneId">Scene</label>
+
+                            <select name="sceneId" >
+                                <option value="">Assign an existing Scene...</option>
+                                {scenes.map(scene => (
+
+                                    <option key={scene.id} value={[scene.id]}>{" | " + scene.name}</option>
+                                ))}
+                            </select>  </div>
+
 
                         <label htmlFor="baseLayer">Base Layer?</label>
                         <input type="checkbox" name="baseLayer" id="baseLayer" />
