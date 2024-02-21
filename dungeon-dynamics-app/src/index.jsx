@@ -218,7 +218,7 @@ export class App extends Component {
 	render() {
 		const { layers, scenes, formVisible, environments, howlGroup } = this.state;
 		return (
-			<div>
+			<div id="mainApp">
 				<Header scenes={scenes} environments={environments} onCreatingItem={this.handleCreatingItem} onSaveStateToLocalStorage={this.handleSaveStateToLocalStorage} onSaveStateToFile={this.handleSaveStateToFile}
 				></Header>
 				{formVisible ? <CreateItem></CreateItem> : null}
