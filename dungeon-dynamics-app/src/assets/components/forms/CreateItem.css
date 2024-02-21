@@ -8,11 +8,26 @@
     align-self: center;
     align-items: center; */
     background-color: rgba(70, 70, 70, 0.94);
-    width: 50vw;
+    width: 500px;
     /* min-height: 35vh; */
     border: 1px dashed rgb(0, 174, 255);
     border-radius: 5px;
 
+}
+
+.handle {
+    background-color: rgb(11, 106, 184);
+    /* width: 500px; */
+    min-width: 100%;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.exitButton {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    /* background-color: rgb(14, 71, 71); */
 }
 
 .creationForm {
