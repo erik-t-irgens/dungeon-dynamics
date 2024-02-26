@@ -38,47 +38,11 @@ export default function CreateItem(props) {
         onCreatingItem(data, formType);
     };
 
-    // const handleMouseDown = (event) => {
-    //     setIsDragging(true);
-    //     setOffsetX((event.clientX - posX) / 10);
-    //     setOffsetY((event.clientY - posY) / 10);
-    // };
-
-    // const handleMouseMove = (event) => {
-    //     event.preventDefault()
-    //     if (isDragging) {
-    //         const deltaX = event.clientX - offsetX - posX;
-    //         const deltaY = event.clientY - offsetY - posY;
-    //         setPosX((posX + deltaX) / 10);
-    //         setPosY((posY + deltaY) / 10);
-    //     }
-    // };
-
-    // const handleMouseUp = () => {
-    //     setIsDragging(false);
-    // };
-
-    // useEffect(() => {
-    //     if (isDragging) {
-    //         document.addEventListener("mousemove", handleMouseMove);
-    //         document.addEventListener("mouseup", handleMouseUp);
-    //     } else {
-    //         document.removeEventListener("mousemove", handleMouseMove);
-    //         document.removeEventListener("mouseup", handleMouseUp);
-    //     }
-
-    //     return () => {
-    //         document.removeEventListener("mousemove", handleMouseMove);
-    //         document.removeEventListener("mouseup", handleMouseUp);
-    //     };
-    // }, [isDragging]);
-
 
     return (
 
         <Draggable handle=".handle" bounds="#mainApp">
             <div className="createForm" style={{ top: `${posY}vw`, left: `${posX}vw` }}
-            // onMouseDown={handleMouseDown}
             >
                 <div className="handle">
                     <button className=" exitButton" onClick={onOpenForm}>&#x2715;</button>
