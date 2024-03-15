@@ -86,6 +86,9 @@ An application intended for Dungeon Masters or others hoping to create an immers
 * [Preact](https://preactjs.com/)
 * [Howler.js](https://howlerjs.com/)
 * [React-Draggable](https://www.npmjs.com/package/react-draggable)
+* [Vite](https://vitejs.dev/)
+* [Babel](https://babeljs.io/)
+* [ESLint](https://eslint.org/)
 
 <!-- ### 🔍 Preview -->
 
